@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fde2e4, #f9c5d1);
+    padding: 20px;
+    color: #333;
+}
+
+/* Header / Hero */
+.hero {
+    text-align: center;
+    padding: 70px 20px;
+    color: #7a1f3d;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Card Layout */
+.card {
+    max-width: 900px;
+    margin: 25px auto;
+    padding: 30px;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 15px 35px rgba(122, 31, 61, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 45px rgba(122, 31, 61, 0.25);
+}
+
+.card h2 {
+    margin-bottom: 15px;
+    font-size: 1.7rem;
+    color: #c2185b;
+    border-left: 5px solid #f48fb1;
+    padding-left: 12px;
+}
+
+/* Text */
+.card p {
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+/* List */
+.card ul {
+    list-style: none;
+}
+
+.card ul li {
+    margin-bottom: 10px;
+    padding-left: 18px;
+    position: relative;
+}
+
+.card ul li::before {
+    content: "♥";
+    color: #e91e63;
+    position: absolute;
+    left: 0;
+}
+
+/* Skills */
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.skills span {
+    background: linear-gradient(135deg, #f06292, #ec407a);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(236, 64, 122, 0.4);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #7a1f3d;
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
