@@ -4,18 +4,622 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rizyll Paculba | Frontend Developer Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap)" rel="stylesheet">
+    <link rel="stylesheet" href="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #0ea5e9;
+            --dark: #0f172a;
+            --dark-light: #1e293b;
+            --gray: #64748b;
+            --light: #f1f5f9;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--dark);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 5% 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #6366f1 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='[w3.org](http://www.w3.org/2000/svg)'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .profile-container {
+            position: relative;
+            margin-bottom: 2rem;
+            z-index: 1;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--white);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-container::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .location {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            color: var(--white);
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-buttons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .card h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .card p {
+            color: var(--gray);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .info-item:hover a {
+            color: var(--white);
+        }
+
+        .info-item i {
+            font-size: 1.25rem;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover i {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+        }
+
+        .info-item a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: var(--light);
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 500;
+            color: var(--dark);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(14, 165, 233, 0.1));
+            transform: translateY(-3px);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .project-item {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(14, 165, 233, 0.08));
+            transform: translateX(5px);
+        }
+
+        .project-item h3 {
+            color: var(--dark);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-item p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-stack {
+            display: inline-flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-stack span {
+            background: var(--white);
+            padding: 0.375rem 0.875rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--light);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--light);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2.5rem 5%;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark-light);
+            color: var(--white);
+            border-radius: 50%;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        footer p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 5%;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                opacity: 0;
+                transition: all 0.3s ease;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .card {
+                padding: 1.75rem;
+            }
+
+            .hero {
+                padding: 100px 5% 50px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+
+            .skills-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-img {
+                width: 130px;
+                height: 130px;
+            }
+
+            .card {
+                padding: 1.5rem;
+                border-radius: 16px;
+            }
+
+            .card h2 {
+                font-size: 1.5rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem;
+            }
+
+            .skill-tag {
+                padding: 0.875rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .btn-submit {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="logo">RP</div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+            <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
         </ul>
     </nav>
 
@@ -26,55 +630,126 @@
         <div class="hero-content">
             <h1>Rizyll Paculba</h1>
             <p class="subtitle">Aspiring Frontend Developer & Tech Student</p>
-            <p class="location">📍 La Esperanza, Rizal, Zamboanga del Norte</p>
+            <p class="location">
+                <i class="fas fa-map-marker-alt"></i>
+                La Esperanza, Rizal, Zamboanga del Norte
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Get In Touch
+                </a>
+                <a href="#projects" class="btn btn-outline">
+                    <i class="fas fa-folder-open"></i> View Projects
+                </a>
+            </div>
         </div>
     </header>
 
     <main class="container">
         <section id="about" class="card">
             <h2>About Me</h2>
-            <p>I am a 19-year-old student at <strong>Colegio de San Francisco Javier</strong>, passionate about building clean, functional, and user-friendly web experiences.</p>
+            <p>I am a 19-year-old student at <strong>Colegio de San Francisco Javier</strong>, passionate about building clean, functional, and user-friendly web experiences. I'm constantly learning new technologies and improving my craft to create meaningful digital solutions.</p>
             <div class="info-grid">
-                <span><strong>Email:</strong> <a href="mailto:rizyllp5@gmail.com">rizyllp5@gmail.com</a></span>
-                <span><strong>Phone:</strong> +63 927 638 2862</span>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <small style="color: var(--gray);">Email</small><br>
+                        <a href="mailto:rizyllp5@gmail.com">rizyllp5@gmail.com</a>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <small style="color: var(--gray);">Phone</small><br>
+                        <span>+63 927 638 2862</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="skills" class="card">
             <h2>Technical & Soft Skills</h2>
             <div class="skills-container">
-                <div class="skill-tag">HTML5</div>
-                <div class="skill-tag">CSS3</div>
-                <div class="skill-tag">Basic Computer Skills</div>
-                <div class="skill-tag">Effective Communication</div>
-                <div class="skill-tag">Collaborative Teamwork</div>
+                <div class="skill-tag">🌐 HTML5</div>
+                <div class="skill-tag">🎨 CSS3</div>
+                <div class="skill-tag">💻 Basic Computer</div>
+                <div class="skill-tag">🗣️ Communication</div>
+                <div class="skill-tag">🤝 Teamwork</div>
+                <div class="skill-tag">📚 Quick Learner</div>
             </div>
         </section>
 
         <section id="projects" class="card">
             <h2>Featured Projects</h2>
-            <div class="project-item">
-                <h3>Personal Portfolio Website</h3>
-                <p>A responsive personal website built to showcase my educational background and technical skills in web development.</p>
-                <span class="tech-stack">HTML • CSS • Responsive Design</span>
+            <div class="projects-grid">
+                <div class="project-item">
+                    <h3>🚀 Personal Portfolio Website</h3>
+                    <p>A responsive personal website built to showcase my educational background and technical skills in web development. Designed with modern aesthetics and mobile-first approach.</p>
+                    <div class="tech-stack">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>Responsive Design</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="contact" class="card">
             <h2>Get In Touch</h2>
-            <p>I'm always open to discussing new projects or creative opportunities.</p>
+            <p>I'm always open to discussing new projects, creative opportunities, or potential collaborations. Feel free to reach out!</p>
             <form class="contact-form">
                 <input type="text" placeholder="Your Name" required>
                 <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" rows="4" required></textarea>
-                <button type="submit" class="btn">Send Message</button>
+                <textarea placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
             </form>
         </section>
     </main>
 
     <footer>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:rizyllp5@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
         <p>&copy; 2026 Rizyll Paculba. Built with passion and code.</p>
     </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('.navbar');
+            const navLinks = document.getElementById('navLinks');
+            if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
